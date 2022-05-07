@@ -1,1 +1,1 @@
-Sitemap: https://lawrencecchen.github.io/blog/sitemap.xml
+Sitemap: https://lawrencecchen.dev/sitemap.xml
