@@ -2,10 +2,10 @@
   
     
         "post0": {
-            "title": "Raspberry Pi Remote Control Car",
-            "content": "Berkeley’s EECS 16b final lab is a voice controlled car. The courses uses a TI Launchpad (which is really outdated and slow), and only roughly four commands can fit in memory (even after computing the minimum norm to pre-computed priniciple component vectors). I decided to replace the entire system with a remote controller app (full-screen website) and a Raspberry Pi. . &gt; youtube: https://www.youtube.com/watch?v=zoL8l5jb-1E .",
-            "url": "https://lawrencecchen.github.io/blog/markdown/2022/05/07/human-in-the-loop-16b.html",
-            "relUrl": "/markdown/2022/05/07/human-in-the-loop-16b.html",
+            "title": "Title",
+            "content": "Raspberry Pi Remote Control Car . Making a remote controlled robot car with a Raspberry Pi and the EECS 16b lab car. . toc:false- layout: post | categories: [projects] | . Berkeley&#39;s EECS 16b final lab is a voice controlled car. The courses uses a TI Launchpad (which is really outdated and slow), and only roughly four commands can fit in memory (even after computing the minimum norm to pre-computed priniciple component vectors). I decided to replace the entire system with a remote controller app (full-screen website) and a Raspberry Pi. . .",
+            "url": "https://lawrencecchen.github.io/blog/2022/05/07/human-in-the-loop-16b.html",
+            "relUrl": "/2022/05/07/human-in-the-loop-16b.html",
             "date": " • May 7, 2022"
         }
         
