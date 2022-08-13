@@ -1,0 +1,45 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    publishDate: string;
+    heroImage?: {
+      src: string;
+      alt: string;
+    };
+  };
+}
+
+const {
+  content: { title, description, publishDate, heroImage },
+} = Astro.props as Props;
+---
+
+<html>
+
+<head>
+  <BaseHead title={title} description={description} />
+</head>
+
+<body>
+  <article class="max-w-3xl w-full mx-auto py-20 p-4">
+    <header class="mb-8">
+      <h1 class="text-3xl font-medium pb-2 mb-2 border-b text-neutral-900">{title}</h1>
+      <div class="flex items-center justify-between">
+
+        <time class="text-sm text-neutral-400 tracking-wide">{publishDate}</time>
+
+        <a href="/" class="text-blue-500 text-sm">See all posts</a>
+      </div>
+    </header>
+    <main class="prose max-w-full">
+      <slot></slot>
+    </main>
+  </article>
+</body>
+
+</html>

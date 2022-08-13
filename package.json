@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --experimental-integrations",
+    "start": "astro dev",
+    "build": "astro build --experimental-integrations",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^0.9.0",
+    "@astrojs/preact": "^1.0.2",
+    "@astrojs/tailwind": "^1.0.0",
+    "astro": "^1.0.4"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.4",
+    "astro-embed": "^0.1.1",
+    "preact": "^10.7.3"
+  }
+}

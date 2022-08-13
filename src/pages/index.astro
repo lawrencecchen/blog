@@ -1,0 +1,43 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
+
+const title = `Lawrence Chen's website`;
+let description = `Lawrence Chen's website`;
+
+interface Frontmatter {
+  title: string;
+  publishDate: string;
+  published?: boolean;
+  description?: string;
+}
+const unsortedPosts = await Astro.glob<Frontmatter>('./posts/*.mdx');
+
+const posts = unsortedPosts.sort(function (a, b) {
+  return (
+    new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
+  );
+}).filter(post => typeof post.frontmatter.published === 'undefined' || !!post.frontmatter.published);
+---
+
+<html lang="en">
+
+<head>
+  <BaseHead title={title} description={description} />
+</head>
+
+<body>
+  <main class="max-w-3xl w-full mx-auto py-20 p-4">
+    <section class="py-8 border-b mb-8">
+      <h1 class="text-center mx-auto text-3xl font-medium text-neutral-800">{title}</h1>
+    </section>
+    <section aria-label="Blog post list" class="space-y-2">
+      {posts.map(({ url, frontmatter }) => (
+      <BlogPostPreview title={frontmatter.title} description={frontmatter.description ?? "" }
+        publishDate={frontmatter.publishDate} url={url ?? "" } />
+      ))}
+    </section>
+  </main>
+</body>
+
+</html>
