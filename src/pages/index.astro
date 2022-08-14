@@ -1,6 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import BlogPostPreview from '../components/BlogPostPreview.astro';
+import Footer from "../components/Footer.astro";
 
 const title = `Lawrence Chen's website`;
 let description = `Lawrence Chen's website`;
@@ -11,7 +12,7 @@ interface Frontmatter {
   published?: boolean;
   description?: string;
 }
-const unsortedPosts = await Astro.glob<Frontmatter>('./posts/*.mdx');
+const unsortedPosts = await Astro.glob<Frontmatter>(['./posts/*.md','./posts/*.mdx']);
 
 const posts = unsortedPosts.sort(function (a, b) {
   return (
@@ -27,7 +28,7 @@ const posts = unsortedPosts.sort(function (a, b) {
 </head>
 
 <body>
-  <main class="max-w-3xl w-full mx-auto py-20 p-4">
+  <main class="max-w-3xl w-full mx-auto mt-10 md:mt-20 p-4">
     <section class="py-8 border-b mb-8">
       <h1 class="text-center mx-auto text-3xl font-medium text-neutral-800">{title}</h1>
     </section>
@@ -37,6 +38,7 @@ const posts = unsortedPosts.sort(function (a, b) {
         publishDate={frontmatter.publishDate} url={url ?? "" } />
       ))}
     </section>
+    <Footer />
   </main>
 </body>
 

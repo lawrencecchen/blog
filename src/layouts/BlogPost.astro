@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 export interface Props {
   content: {
@@ -26,7 +27,7 @@ const {
 </head>
 
 <body>
-  <article class="max-w-3xl w-full mx-auto py-20 p-4">
+  <article class="max-w-3xl break-words w-full mx-auto py-20 p-4 flex flex-col min-h-screen">
     <header class="mb-8">
       <h1 class="text-3xl font-medium pb-2 mb-2 border-b text-neutral-900">{title}</h1>
       <div class="flex items-center justify-between">
@@ -36,9 +37,10 @@ const {
         <a href="/" class="text-blue-500 text-sm">See all posts</a>
       </div>
     </header>
-    <main class="prose max-w-full">
+    <main class="prose max-w-full grow">
       <slot></slot>
     </main>
+    <Footer />
   </article>
 </body>
 

@@ -1,11 +1,52 @@
 ---
 layout: "../../layouts/BlogPost.astro"
-title: "Raspberry Pi Remote Control Car"
-publishDate: "07 May 2022"
+title: "remix run ideas"
+publishDate: "13 August 2022"
 ---
 
-import { YouTube } from "astro-embed";
+import { Twitter } from "astro-embed";
 
-Berkeley's EECS 16b final lab is a voice controlled car. The courses uses a TI Launchpad (which is really outdated and slow), and only roughly four commands can fit in memory (even after computing the minimum norm to pre-computed priniciple component vectors). I decided to replace the entire system with a remote controller app (full-screen website) and a Raspberry Pi.
+my thoughts:
+tldr; no-code kinda sucks. vercel/netlify/infrastructure is pretty good. remix should compete for the former. they’ll also have higher margins (eg. zapier, wordpress, wix, etc.)
 
-<YouTube id="https://www.youtu.be/zoL8l5jb-1E" />
+- devtool companies primarily add value on aws by increasing output/developer:
+    - enable devs to ship faster and scale with less ppl (heroku, vercel/netlify, supabase/planetscale, flightcontrol/railway)
+
+- (ofc you can hire ppl and build everything from raw compute/storage/networking, but the point of devtools is to increase each person’s leverage)
+    - first principles: to create value, you need either a) more output/person and/or b) more people
+    - devtools does the former. no-code does the latter.
+
+- you can create more value by replacing traditional devs. software is probably 1st/2nd most expensive thing to hire for
+    - eg. retool worth more than vercel. gl comparing to wix/wordpress
+    - supply/demand: there are less developers than “pseudo-no-code-devs-who-can-deliver-business-value”
+
+- eventually gpus will be cheaper than people. but for now, making devs marginally more productive (devtools) is less valuable than increasing the number of “devs” (no-code)
+    - side note: no-code enables devs to focus on more valuable problems
+
+- no-code tools kinda suck rn, and a performance-minded team with deep expertise in web fundamentals could deliver so much value this way. 
+    - leverage that by making mass-consumed no-code tools better, not by giving devs something only slightly better
+    - also a very obvious path to squarespace/wordpress/wix/webflow level valuations
+- enable non-devs to make fast/powerful websites (expanding the pie) vs making dev’s life easier than the competition (stealing the pie)
+    - the former will make more $$$
+
+- what MJ theorized remix could sell:
+    - analytics/logging
+    - asset hosting
+    - databases
+- ^ low margin stuff (vercel/netlify is also very low margin lol, yet they somehow justify being expensive. pricing war w/ vercel/netlify will probably be net positive for humanity, but PLEASE just make no-code tools)
+
+https://overcast.fm/+mBhn4nNN8/16:12
+
+“that’s a huge problem” 16:12
+- consistency of web apps (stale data)
+- mutations as first class api
+    - remix.run won
+- what MJ theorized they could sell:
+    - analytics/logging
+    - asset hosting
+    - databases
+- ^ low margin stuff (vercel/netlify is also very low margin lol, yet they somehow justify being expensive. pricing war w/ vercel/netlify will probably be net positive for humanity, but PLEASE just make no-code tools)
+
+- remix has deep technical expertise.
+    - leverage that by making mass-consumed no-code tools better, not giving devs something only slightly better
+    - remix can make creating fast + powerful websites accessible for a many no-code devs/non-technical people
