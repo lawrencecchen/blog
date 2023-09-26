@@ -1,7 +1,7 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "the post infinity world"
-publishDate: "not yet"
+layout: "../layouts/BlogPost.astro"
+title: "Post-infinity world"
+publishDate: "1/29/2023"
 ---
 
 - seizing the production of memes is useful only in a post-scarcity world

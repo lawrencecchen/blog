@@ -1,7 +1,7 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "realtime application holotypes"
-publishDate: "future"
+layout: "../layouts/BlogPost.astro"
+title: "Realtime application holotypes"
+publishDate: "1/23/2023"
 ---
 
 maybe this should be called multiplayer application holotypes

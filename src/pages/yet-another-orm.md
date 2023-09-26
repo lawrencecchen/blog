@@ -1,14 +1,78 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "yet another ORM"
-publishDate: "future"
+layout: "../layouts/BlogPost.astro"
+title: "Yet another ORM"
+publishDate: "1/29/2023"
 ---
+
+## 1/29/2023 updates
+
+Compile to Prisma to get lots of free stuff (schema migrations for popular SQL databases) under the hood. Then, TypeScript infer a Kysely client for better portability (and running on edge runtimes). We can likely replicate a significant portion of Prisma's API on top of Kysely.
+
+API I'm leaning towards:
+
+```ts
+import { zodma, table } from 'zodma';
+import { z } from 'zod'
+
+// Example DDL for next-auth
+const { db } = zodma
+  .config({
+    databaseUrl: "postgres://localhost:5432",
+  })
+  .tables({
+    account: table
+      .columns({
+        id: z.string().uuid().primaryKey(),
+        userId: z.string().unique(),
+        type: z.string(),
+        provider: z.string(),
+        providerAccountId: z.string(),
+        refresh_token: z.string().optional(),
+        access_token: z.string().optional(),
+        expires_at: z.number().optional(),
+        token_type: z.string().optional(),
+        scope: z.string().optional(),
+        id_token: z.string().optional(),
+        session_state: z.string().optional(),
+      })
+      .unique(["provider", "providerAccountId"]),
+    session: table.columns({
+      id: z.string().uuid().primaryKey(),
+      sessionToken: z.string().unique(),
+      userId: z.string(),
+      expires: z.string(),
+    }),
+    user: table.columns({
+      id: z.string().uuid().primaryKey(),
+      name: z.string(),
+      email: z.string().optional().unique(),
+      emailVerified: z.date().optional(),
+      image: z.string().optional(),
+    }),
+    verificationToken: table
+      .columns({
+        identifier: z.string(),
+        token: z.string().unique(),
+        expires: z.date(),
+      })
+      .unique(["identifier", "token"]),
+  });
+
+// querying with db (kysely wrapper)
+db.selectFrom("user").where("id", "=", "213").execute()
+
+// schema validation (zod)
+const unsafeAccount = ...
+const account = db.account.parse(unsafeAccount)
+```
+
+## why
 
 Prisma has a pretty good developer experience. But behind the scenes, you've wrestled with monorepos, generated a thicc prisma client, and learned a custom dsl. Eventually, you'll find out that your vercel deployments have mind-numbingly slow cold starts since you don't have any users.
 
 I think I can make a better ORM with these goals in mind.
 
-## goals:
+## goals
 
 - use zod for schema declaration.
   - no prisma generate
@@ -23,7 +87,10 @@ I think I can make a better ORM with these goals in mind.
 - lightweight (don't generate a heavy rust client)
   - first class support for edge environments
   - a lightweight data proxy
+- can wrap fetch wrappers such as:
   - support for cloudflare d1 when it comes out
+  - postgrest/supabase https://postgrest.org/en/stable/, https://github.com/supabase/supabase-js
+  - planetscale https://github.com/planetscale/database-js
 - good monorepo support
 
 ## how to improve prisma
@@ -40,11 +107,12 @@ I think I can make a better ORM with these goals in mind.
 
 ## improvements on edgedb
 
-edgedb as more feature-rich than prisma (eg. you can declare views, functions, CTEs, and a lot more using EdgeQL), but this means that edgedb's implementation depends heavily on postgres.
+edgedb is more feature-rich than prisma (eg. you can declare views, functions, CTEs, and a lot more using EdgeQL), but this means that edgedb's implementation depends heavily on postgres.
 
 Colin, the creator of Zod (who now works at edgedb) has briefly explored this idea:
 
 - https://github.com/colinhacks/zod/issues/53#issuecomment-669586200
+- https://twitter.com/colinhacks/status/1344007284033114118
 
 His main critique is that [Zod is not expressive enough](https://twitter.com/colinhacks/status/1551712322334248960), but I think that you could make something that is competitive with Prisma using Zod's API along with Kysely's TypeScript magic.
 

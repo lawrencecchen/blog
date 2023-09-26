@@ -2,3 +2,8 @@ run = "npm run dev"
 
 [nix]
 channel = "stable-21_11"
+
+[deployment]
+build = ["sh", "-c", "npm run build"]
+deploymentTarget = "static"
+publicDir = "dist"

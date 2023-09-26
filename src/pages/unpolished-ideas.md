@@ -1,6 +1,6 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "unpolished ideas"
+layout: "../layouts/BlogPost.astro"
+title: "Unpolished ideas"
 publishDate: "not yet"
 ---
 

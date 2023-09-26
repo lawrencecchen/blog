@@ -12,7 +12,7 @@ interface Frontmatter {
   published?: boolean;
   description?: string;
 }
-const unsortedPosts = await Astro.glob<Frontmatter>(['./posts/*.md','./posts/*.mdx']);
+const unsortedPosts = await Astro.glob<Frontmatter>(['./*.md','./*.mdx']);
 
 const posts = unsortedPosts.sort(function (a, b) {
   return (

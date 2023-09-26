@@ -1,6 +1,6 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "tools to write more"
+layout: "../layouts/BlogPost.astro"
+title: "Tools to write more"
 publishDate: "future"
 ---
 

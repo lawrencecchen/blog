@@ -1,6 +1,6 @@
 ---
-layout: "../../layouts/BlogPost.astro"
-title: "mind viruses are good"
+layout: "../layouts/BlogPost.astro"
+title: "Mind viruses are good"
 publishDate: "future"
 ---
 
@@ -25,7 +25,8 @@ this formula has worked for the Buddha, jesus, hitler, stalin, musicians, olympi
 - music is the most infectious mind virus
   - tiktok -- metronome
 
-
+- ["the thing that is surprising about human nature is that human beings long to be with other people"](https://youtu.be/seBndOROJt4?t=1023)
+  - longing to comune with others like us
 
 ## monetization
 
