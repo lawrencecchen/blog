@@ -1,0 +1,47 @@
+---
+layout: "../layouts/BlogPost.astro"
+title: "How to use OpenAI's TypeScript client with Together AI (Mixtral)"
+publishDate: "12/12/2023"
+---
+
+```ts
+const TOGETHER_API_KEY = 'heh'
+export const together = new OpenAI({
+  apiKey: TOGETHER_API_KEY,
+  baseURL: 'https://api.together.xyz/',
+})
+
+const response = await together.completions.create({
+  model: 'DiscoResearch/DiscoLM-mixtral-8x7b-v2',
+  prompt: 'The meaning of life is',
+  stream_tokens: true,
+  stop: [
+    '<|im_end|>',
+    '<|im_start|>'
+  ]
+})
+```
+
+- Note the baseURL (it's not https://api.together.xyz/inference)
+- `frequency_penalty` seems to be named `repitition_penalty`
+
+
+```bash
+curl -X POST https://api.together.xyz/inference \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $TOGETHER_API_KEY"\
+  -d '{
+  "model": "DiscoResearch/DiscoLM-mixtral-8x7b-v2",
+  "max_tokens": 512,
+  "prompt": "<|im_start|>user\nTell me about San Francisco<|im_end|>\n<|im_start|>assistant",
+  "temperature": 0.7,
+  "top_p": 0.7,
+  "top_k": 50,
+  "repetition_penalty": 1,
+  "stream_tokens": true,
+  "stop": [
+    "<|im_end|>",
+    "<|im_start|>"
+  ]
+}'
+```
