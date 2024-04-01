@@ -7,3 +7,152 @@ publishDate: "4/1/2024"
 Train 3 identical tool-calling language models on an equivalent datasets formatted in JSON, XML, and sexprs. Which LLM will perform the best? Why doesn't OpenAI or Anthropic implement tool calling using sexprs instead of JSON and XML?
 
 I don't know the answer, but throwing this out there as a request-for-research(/answers).
+
+I started thinking about this when writing fibonaccii in the three representations:
+
+```lisp
+(defun fibonacci (n)
+  (if (or (= n 0) (= n 1))
+      n
+      (+ (fibonacci (- n 1)) (fibonacci (- n 2)))))
+
+(fibonacci 10)
+```
+
+```json
+{
+  "type": "defun",
+  "name": "fibonacci",
+  "parameters": [
+    "n"
+  ],
+  "body": {
+    "type": "if",
+    "condition": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "equals",
+          "operands": [
+            "n",
+            0
+          ]
+        },
+        {
+          "type": "equals",
+          "operands": [
+            "n",
+            1
+          ]
+        }
+      ]
+    },
+    "then": "n",
+    "else": {
+      "type": "plus",
+      "operands": [
+        {
+          "type": "function-call",
+          "name": "fibonacci",
+          "arguments": [
+            {
+              "type": "minus",
+              "operands": [
+                "n",
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "type": "function-call",
+          "name": "fibonacci",
+          "arguments": [
+            {
+              "type": "minus",
+              "operands": [
+                "n",
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+},
+{
+  "type": "function-call",
+  "name": "fibonacci",
+  "arguments": [
+    10
+  ]
+}
+```
+
+```xml
+<defun>
+  <name>fibonacci</name>
+  <parameters>
+    <parameter>n</parameter>
+  </parameters>
+  <body>
+    <if>
+      <condition>
+        <or>
+          <condition>
+            <equals>
+              <operand>n</operand>
+              <operand>0</operand>
+            </equals>
+          </condition>
+          <condition>
+            <equals>
+              <operand>n</operand>
+              <operand>1</operand>
+            </equals>
+          </condition>
+        </or>
+      </condition>
+      <then>n</then>
+      <else>
+        <plus>
+          <operand>
+            <function-call>
+              <name>fibonacci</name>
+              <arguments>
+                <argument>
+                  <minus>
+                    <operand>n</operand>
+                    <operand>1</operand>
+                  </minus>
+                </argument>
+              </arguments>
+            </function-call>
+          </operand>
+          <operand>
+            <function-call>
+              <name>fibonacci</name>
+              <arguments>
+                <argument>
+                  <minus>
+                    <operand>n</operand>
+                    <operand>2</operand>
+                  </minus>
+                </argument>
+              </arguments>
+            </function-call>
+          </operand>
+        </plus>
+      </else>
+    </if>
+  </body>
+</defun>
+
+<function-call>
+  <name>fibonacci</name>
+  <arguments>
+    <argument>10</argument>
+  </arguments>
+</function-call>
+```
