@@ -17,10 +17,27 @@ const posts = Object.entries({...allPosts[0], ...allPosts[1]})
     url: path.replace('./', '/').replace(/\.(md|mdx)$/, '/'),
     frontmatter: post.frontmatter
   }))
-  .sort((a, b) => 
-    new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
-  )
-  .filter(post => typeof post.frontmatter.published === 'undefined' || !!post.frontmatter.published);
+  .filter(post => typeof post.frontmatter.published === 'undefined' || !!post.frontmatter.published)
+  .sort((a, b) => {
+    const dateA = new Date(a.frontmatter.publishDate);
+    const dateB = new Date(b.frontmatter.publishDate);
+    
+    // Check if dates are valid
+    const isValidA = !isNaN(dateA.getTime());
+    const isValidB = !isNaN(dateB.getTime());
+    
+    // If both dates are invalid, maintain original order
+    if (!isValidA && !isValidB) return 0;
+    
+    // If only A is invalid, put it at the end
+    if (!isValidA) return 1;
+    
+    // If only B is invalid, put it at the end
+    if (!isValidB) return -1;
+    
+    // Both dates are valid, sort in descending order (newest first)
+    return dateB.valueOf() - dateA.valueOf();
+  });
 ---
 
 <html lang="en">
