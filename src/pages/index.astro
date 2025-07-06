@@ -6,19 +6,21 @@ import Footer from "../components/Footer.astro";
 const title = `Lawrence Chen's website`;
 let description = `Lawrence Chen's website`;
 
-interface Frontmatter {
-  title: string;
-  publishDate: string;
-  published?: boolean;
-  description?: string;
-}
-const unsortedPosts = await Astro.glob<Frontmatter>(['./*.md','./*.mdx']);
+// Get all posts from both .md and .mdx files
+const allPosts = await Promise.all([
+  import.meta.glob('./*.md', { eager: true }),
+  import.meta.glob('./*.mdx', { eager: true })
+]);
 
-const posts = unsortedPosts.sort(function (a, b) {
-  return (
+const posts = Object.entries({...allPosts[0], ...allPosts[1]})
+  .map(([path, post]: [string, any]) => ({
+    url: path.replace('./', '/').replace(/\.(md|mdx)$/, '/'),
+    frontmatter: post.frontmatter
+  }))
+  .sort((a, b) => 
     new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
-  );
-}).filter(post => typeof post.frontmatter.published === 'undefined' || !!post.frontmatter.published);
+  )
+  .filter(post => typeof post.frontmatter.published === 'undefined' || !!post.frontmatter.published);
 ---
 
 <html lang="en">

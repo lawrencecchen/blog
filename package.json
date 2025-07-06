@@ -3,22 +3,25 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev --experimental-integrations --port 3001",
+    "dev": "astro dev --port 3001",
     "start": "astro dev --host 0.0.0.0",
-    "build": "astro build --experimental-integrations",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "astro check && tsc --noEmit"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^0.9.0",
-    "@astrojs/preact": "^1.0.2",
-    "@astrojs/tailwind": "^1.0.0",
-    "astro": "^1.0.4"
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/preact": "^4.1.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@types/node": "^22.0.0",
+    "astro": "^5.11.0",
+    "typescript": "^5.7.0"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.4",
-    "astro-embed": "^0.1.1",
-    "preact": "^10.7.3"
+    "@tailwindcss/typography": "^0.5.14",
+    "astro-embed": "^0.7.0",
+    "preact": "^10.24.0"
   }
 }

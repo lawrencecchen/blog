@@ -1,6 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 export interface Props {
@@ -16,7 +15,7 @@ export interface Props {
 }
 
 const {
-  content: { title, description, publishDate, heroImage },
+  content: { title, description, publishDate },
 } = Astro.props as Props;
 ---
 
