@@ -1,6 +1,6 @@
 ---
 layout: "../layouts/BlogPost.astro"
-# title: "Coderouter, a web app that spawns Claude Code/Codex/etc in parallel"
+# title: "cmux, a web app that spawns Claude Code/Codex/etc in parallel"
 title: "cmux, an open source Claude Code manager that also supports Codex/Gemini/OpenCode/Amp CLI"
 publishDate: "07/06/2025"
 published: false
@@ -10,7 +10,7 @@ TL;DR cmux is a web app that spawns Claude Code, Codex, Gemini CLI, Amp, Opencod
 
 Recently, I've almost completely moved from Cursor to Claude Code. I spend more time in the vscode terminal + vscode git than I do in Cursor's sidebar.
 
-![Coderouter screenshot](/coderouter/claude-code-cursor.png)
+![cmux screenshot](/cmux/claude-code-cursor.png)
 
 Each one of the "node" terminals is an instance of Claude Code (--dangerously-skip-permissions!). Usually, I can only juggle two or three Claudes at a time in different parts of the codebase. Most of the "node" processes at the top are Claude sessions from the past, as I find it easier to make new terminals instead of clearing Claude's context.
 
@@ -18,7 +18,7 @@ I've recently started using git worktrees to make more isolated environments for
 
 Instead of juggling claudes in a single directory, I really should be using git worktrees.
 
-Coderouter uses git worktrees to make isolated environments for Claude Code. It also uses 
+cmux uses git worktrees to make isolated environments for Claude Code. It also uses 
 
 ## Sandboxing
 
@@ -26,15 +26,15 @@ On macOS, Codex uses sandbox-exec as a minimal sandbox. Claude Code doesn't have
 
 ## Searching for the best CLI coding agent
 
-Today, the best general coding agent is Claude Code. But codex + o3 is anecdotally better for me when I want to implement/optimize a well defined piece of code that doesn't require significant retrieval. Not having to think about which implementation is better for what is one of the goals of coderouter, though this comes at the (sometimes steep) cost of tokens.
+Today, the best general coding agent is Claude Code. But codex + o3 is anecdotally better for me when I want to implement/optimize a well defined piece of code that doesn't require significant retrieval. Not having to think about which implementation is better for what is one of the goals of cmux, though this comes at the (sometimes steep) cost of tokens.
 
 ## Verification is a hard problem
 
 ## Tools for reviewing work
 
-The first iteration of coderouter included runs + diffs:
+The first iteration of cmux included runs + diffs:
 
-![Coderouter first iteration runs + diffs screenshot](/coderouter/coderouter-v0-runs-diffs.png)
+![cmux first iteration runs + diffs screenshot](/cmux/cmux-v0-runs-diffs.png)
 
 I still found myself going back to the vscode terminal though, since there was no easy way to verify if the code worked or not. Having a vscode instance where I could easily look at the logs was important.
 
@@ -61,7 +61,7 @@ Claude Code is arguably a better coding agent than Devin.
 
 ## Standards
 
-There exists AGENTS.md, CLAUDE.md, GEMINI.md, .cursorrules, etc. If you have a CLAUDE.md file, Coderouter will automatically create the right files for each coding agent.
+There exists AGENTS.md, CLAUDE.md, GEMINI.md, .cursorrules, etc. If you have a CLAUDE.md file, cmux will automatically create the right files for each coding agent.
 
 AGENTS.md
 
