@@ -38,11 +38,31 @@ I still found myself going back to the vscode terminal though, since there was n
 
 ## Other Claude Code wrappers
 
+There's a lot of people thinking about this space:
+
+- https://www.terragonlabs.com/
+- https://github.com/getAsterisk/claudia
+- https://github.com/kbwo/ccmanager
+- https://github.com/smtg-ai/claude-squad
+
+I still decided to work on cmux to scratch my own itch. I also had some specific needs that other wrappers didn't entirely satisfy, so it made sense to build my own. Some needs (that I may or may not have implemented yet):
+
+- Open source
+- Running dev servers, which is very important for manually testing/verifying if frontend code works.
+- Better interface for reviewing outputs. For example, if it's a UI, I want 
+- One liner (`bunx cmux ssh`) that sshs into a remote machine and starts a cmux instance accessible from the browser, to make it easier to use cmux on remote machines.
+- Polished mobile app, not a PWA wrapper.
+
 ## Standards
 
 There exists AGENTS.md, CLAUDE.md, GEMINI.md, .cursorrules, etc. If you have a CLAUDE.md file, Coderouter will automatically create the right files for each coding agent.
 
 AGENTS.md
+
+# Why can't I just ________
+
+- Use worktrees: no actual isolation
+- Use @claude on GitHub issues: 1. you have to use GitHub, 2. 
 
 ## After Cursor
 
