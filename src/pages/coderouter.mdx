@@ -1,16 +1,16 @@
 ---
 layout: "../layouts/BlogPost.astro"
-title: "Coderouter, a web app that spawns Claude Code/Codex/etc in parallel"
+# title: "Coderouter, a web app that spawns Claude Code/Codex/etc in parallel"
+title: "cmux, an open source Claude Code manager that also supports Codex/Gemini/OpenCode/Amp CLI"
 publishDate: "07/06/2025"
 published: false
 ---
 
-TL;DR Coderouter is a web app that spawns Claude Code, Codex, Gemini CLI, Amp, Opencode, and other coding agent CLIs in parallel. It also has a convenient git diff/PR-review interface to make it easy to review code.
+TL;DR cmux is a web app that spawns Claude Code, Codex, Gemini CLI, Amp, Opencode, and other coding agent CLIs in parallel across multiple tasks. For each run, cmux spawns an isolated openvscode instance via Docker or a configurable sandbox provider (like Morph/Daytona/E2B). The openvscode instance by default opens the git diff UI and a terminal with the running dev server (configurable via devcontainer.json).
 
 Recently, I've almost completely moved from Cursor to Claude Code. I spend more time in the vscode terminal + vscode git than I do in Cursor's sidebar.
 
 ![Coderouter screenshot](/coderouter/claude-code-cursor.png)
-
 
 Each one of the "node" terminals is an instance of Claude Code (--dangerously-skip-permissions!). Usually, I can only juggle two or three Claudes at a time in different parts of the codebase. Most of the "node" processes at the top are Claude sessions from the past, as I find it easier to make new terminals instead of clearing Claude's context.
 
@@ -22,11 +22,13 @@ Coderouter uses git worktrees to make isolated environments for Claude Code. It 
 
 ## Sandboxing
 
-On macOS, Codex uses sandbox-exec as a minimal sandbox. Claude Code uses
+On macOS, Codex uses sandbox-exec as a minimal sandbox. Claude Code doesn't have any real sandboxing. 
 
 ## Searching for the best CLI coding agent
 
 Today, the best general coding agent is Claude Code. But codex + o3 is anecdotally better for me when I want to implement/optimize a well defined piece of code that doesn't require significant retrieval. Not having to think about which implementation is better for what is one of the goals of coderouter, though this comes at the (sometimes steep) cost of tokens.
+
+## Verification is a hard problem
 
 ## Tools for reviewing work
 
@@ -53,6 +55,10 @@ I still decided to work on cmux to scratch my own itch. I also had some specific
 - One liner (`bunx cmux ssh`) that sshs into a remote machine and starts a cmux instance accessible from the browser, to make it easier to use cmux on remote machines.
 - Polished mobile app, not a PWA wrapper.
 
+## How is this different from Devin or chatgpt.com/codex?
+
+Claude Code is arguably a better coding agent than Devin.
+
 ## Standards
 
 There exists AGENTS.md, CLAUDE.md, GEMINI.md, .cursorrules, etc. If you have a CLAUDE.md file, Coderouter will automatically create the right files for each coding agent.
@@ -74,3 +80,19 @@ after linear is tiktok + tinder. like infinite feed of agents with completed tas
 
 what's after tiktok/tinder?
 is the developer even relevant then?
+
+# On launching early
+
+An early version of cmux was ready a while ago. I didn't launch it because I didn't find it useful. It's hard to verify if code works from just diffs, and the workflow for 
+
+# Git worktrees vs copy vs git pull
+
+On Conductor's Show HN, myflash13 commented:
+
+> I was really excited to try this but this does NOT work the way I expected. I wanted a simple git worktree manager for my existing, already-checked-out repository. Instead, it requests Github permissions and clones the repo from Github. This is bad, because you need to run all the dependency installs, etc. for every workspace before being able to test anything. In other words it's like Codex or Cursor Background Agents, except worse, because it's on your machine. The reason I don't use Codex or Background Agents is because my project has way too many dependencies and would take way too long (and too complicated) to install everything required to have an isolated running instance, plus there would be DNS conflicts, external API conflicts, among other issues.
+
+> What I do want is simple git worktree management for an already-checked-out repo on my machine, no Github permissions or dependency re-installation (copying node_modules, etc.).
+
+https://news.ycombinator.com/item?id=44628011
+
+This is a very valid point, and I'm still thinking about how to satisfy myflash13's use case while still making verification easy. For example, setting up Bun's development environment takes 10-30 minutes. I think one reason Jarred Sumner finds Cluade Code so much more useful than more async coding agents like Devin, is that he can immediately run 
